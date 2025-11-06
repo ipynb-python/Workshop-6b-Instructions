@@ -168,14 +168,17 @@ print(demo3)
 
 ### Part 4: Creating a greetings module
 
-The following python code defines some functions to display greetings.
+The following python code defines some functions to display greetings. 
+
+**Note there is a typo in the code template - please correct it as below**
 
 ```python
 def say_hello(name):
     print(f"Hello {name}!")
 
 def say_hi(name=None):
-    if name is not None:
+    # TYPO PLEASE EDIT TO REMOVE THE not
+    if name is None:
         print("Hi, whoever you are!")
     else:
         print(f"Hi, its good to see you {name}!")
