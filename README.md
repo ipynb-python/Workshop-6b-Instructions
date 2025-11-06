@@ -1,5 +1,18 @@
 # Python Week 6 Assessed Workshop
 
+---
+
+#### Note on workshop attendance...
+
+Please make sure you sign the workshop attendance sheet. 
+
+Work that has been submitted via remote working for core workshops will only be accepted if:
+
+ - students have arranged this with module lead (Phil)
+ - students agree that inclusion of remote work in assessed portfolio may require a viva discussion to check understanding
+
+---
+
 Work in CodeSpaces. 
 
 You may use the following cheat sheets if you need to look up any Python commands.
