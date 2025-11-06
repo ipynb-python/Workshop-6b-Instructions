@@ -1,8 +1,6 @@
-# Python Week 5 Assessed Workshop
+# Python Week 6 Assessed Workshop
 
 Work in CodeSpaces. 
-
-If CodeSpaces does not load after 5 mins (like last week) open JupyterLab and add your answers to the below exercises in a single notebook.
 
 You may use the following cheat sheets if you need to look up any Python commands.
 
@@ -19,187 +17,170 @@ https://github.com/phil-lewis-exe/PythonCheatSheets
 ## TASKS
 
 
-### Part 1: Say Hi
+### Part 1: Rolling Dice
 
-*If you are working in CodeSpaces work in file **`5b_part1.py`***
+Work in code file `6b_part1.py`
 
-Write a Python function called `say_hi` that takes one argument `n`.
+This contains starter code that:
 
-The function should display the message `hi` `n`-times each on a single line.
+ - defines a function to simulate the rolls of a number of dice. 
+ - demonstrates how to call this function to roll two dice, storing the dice roll as variable `demo1` and displays the result.
 
-(i.e. when called with the value 9 it would display hi 9 times).
+```python
+import random
 
-After writing the function show how to call it, using the example value 4.
+def roll_dice(n_dice):
+    n_sides = 6
+    # you do not need to change the code below
+    rolls = []
+    for i in range(n_dice):
+        rolls.append(random.randint(1,n_sides))
+    return rolls
 
-The output should be:
-
+demo1 = roll_dice(2)
+print(demo1)
 ```
-hi
-hi
-hi
-hi
+
+Restructure and change the function so that:
+
+ - it takes the two arguments `n_dice` and `n_sides` (e.g. an 8 sided dice can return values 1-8)
+ - if not provided `n_dice` will take a default value of 1 
+ - if not provided `n_sides` will take a default value of 6
+
+Below the function definition add additional demonstrations storing the results as `demo2` `demo3` and `demo4`, displaying the results in each case:
+
+`demo2` : shows how to calls the function to roll three 10 sided dice
+
+`demo3` : shows how to call the function to roll four dice with 8 sides, specifying the arguments in reverse order 
+
+(i.e. the values must passed in the order `n_sides` then `n_dice` as keyword arguments).
+
+`demo4` : shows how to call the function without specifying arguments (so that the default values are used).
+
+
+---
+
+### Part 2: Finding the length of the longest word
+
+Work in code file `6b_part2.py`
+
+This contains the following starter code that defines a function `max_length` that takes three arguments (`word1`, `word2` and `word3`) that contain strings.
+
+The function makes a list of all the provided words then returns the length of the longest word in the list. 
+
+It then demonstrates how to call this function to using three example words, stores the value returned in variable `demo1`, and displays the result.
+
+```python
+def max_length(word1, word2, word3):
+    word_list = [ word1, word2, word3 ]   
+    # you do not need to change the code below
+    longest_word = word_list[0]
+    for item in word_list:
+        if len(item) > len(longest_word):
+            longest_word = item
+    return len(longest_word)
+
+
+demo1 = max_length("cat","beetles","dogs")
+print(demo1)
+```
+
+Edit the function code so that the function will work with any set of words passed as individual input arguments. 
+
+To demonstrate add the following additional code examples to show your function works correctly in each case: 
+
+```python
+demo2 = max_length("cat")
+print(demo2)
+
+demo3 = max_length("cat","dogs")
+print(demo3)
+
+demo4 = max_length("mouse","cat","apple","banana","enormous")
+print(demo4)
 ```
 
 ---
 
-### Part 2: Calculating a percentage change
 
-*If you are working in CodeSpaces work in file **`5b_part2.py`***
+### Part 3: Processing a string to make replacements
 
-A programmer wants to write code to calculate the percentage change between two values `a` and `b`.
+Work in code file `6b_part3.py`
 
-This can be found using the following formula:
+This contains the following starter code that defines a function `process_text`.
 
-$$\texttt{percent change} = \frac{b - a}{a} \times 100$$
+This is set up to take two arguments:
 
-Write a function `percent_change` that takes two arguments `a` and `b` and returns the percent change.
+ - `mystr` that contains a text string to process
+ - an additional argument that contains a dictionary that defines a set of word replacements pairs, e.g.
 
-After writing your code add the following code lines to test it. 
+`mod_dict = {"cat": "dog", "red": "blue"}`  
+
+It then demonstrates how to call this function, stores the value returned in variable `demo1` and displays the result.
 
 ```python
-check_a = percent_change(50,55)
-check_b = percent_change(50,25)
+def process_str(mystr, mod_dict):
+    for key, value in mod_dict.items():
+        # you do not need to change the code below
+        target = key
+        replacement = value
+        print(f" ( replacing {target} with {replacement} ) ")
+        mystr = mystr.replace(target, replacement)
+    return mystr
 
-print(check_a, check_b)
+mod_dict = {"cat": "dog", "red": "blue"}
+demo1 = process_str("The cat sat on the red mat.",mod_dict)
+print(demo1)
 ```
 
-The output should be 
+Edit the function code so that the function will work with any set of target and replacement pairs passed as an arbitrary number of keyword arguments `kwargs`. 
 
+You should update the demonstration code so that it makes the replacements `cat -> dog` and `red -> blue` using your modified function, i.e.
+
+```python
+demo1 = process_str("The cat sat on the red mat.", cat="dog", red="blue")
+print(demo1)
 ```
-10.0 -50.0
+
+Then add the additional demonstrations to show that your code works correctly in each case.
+
+```python
+demo2 = process_str("The cat sat on the red mat.", cat="mouse")
+print(demo2)
+demo3 = process_str("The cat sat on the red mat.", cat="flea", sat="hopped", mat="dog")
+print(demo3)
 ```
 
 ---
 
+### Part 4: Creating a greetings module
 
-### Part 3: Validating an age variable
-
-*If you are working in CodeSpaces work in file **`5b_part3.py`***
-
-A programmer wants to write code to validate that a provide age is sensible.
-
-This must be done in function `validate` that takes a single argument `age`.
-
-This will **return** the string `passed` if the age is an integer, between 0 and 120 inclusive.
-
-It will **return** the string `failed` for any other age value.
-
-The following code shows a way to check if the age is an integer:
+The following python code defines some functions to display greetings.
 
 ```python
-if age == int(age):
-    print("age is an integer")
-else:
-    print("age is not an integer")
-```
+def say_hello(name):
+    print(f"Hello {name}!")
 
-Write a function `validate` that takes an argument `age` to do this.
-
-After writing your code add the following code lines to test it. 
-
-```python
-check_minus = validate(-5)
-check_20 = validate(20)
-check_150 = validate(150)
-check_non_int = validate(7.2)
-
-print(check_minus, check_20, check_150, check_non_int)
-```
-
-The output should be:
+def say_hi(name=None):
+    if name is not None:
+        print("Hi, whoever you are!")
+    else:
+        print(f"Hi, its good to see you {name}!")
 
 ```
-failed passed failed failed
-```
 
----
+We want to store these functions so that we can call them as python module `greetings`.
 
-### Part 4: Finding the net change over a series
+Create an appropriately named python module file to do this. (e.g. click on the new file icon in the file panel toolbar).
 
-*If you are working in CodeSpaces work in file **`5b_part4.py`***
+Then work in code file `6b_part4.py`
 
-A programmer wants to write code to calculate the net change between the start and end of a timeseries.
-
-For example look at this example timeseries,
+Show how to import the `greetings` module and call the functions it contains using appropriate code so that the file will produce the following output:
 
 ```
-[ 16, 15, 12, 13, 14, 11 ]
-```
-
-Here the first value is 16 the last value is 11 and the net change is -5.
-
-i.e. the net change can be found using:
-
-$$\texttt{net change} =  \texttt{last value} - \texttt{first value}$$
-
-Write a function `net_change` that takes a single argument `time_series`.
-
-It should return the net change over the time series provided. 
-
-You can assume the time series passed is always valid and contains at least two values.
-
-After writing your code add the following code lines to test it. 
-
-```python 
-series1 = [ 1, 0, 2, 4 ]
-series2 = [ 10, 0, 2 ]
-
-check_series1 = net_change(series1)
-check_series2 = net_change(series2)
-
-print(check_series1, check_series2)
-```
-
-This should produce the following output:
-
-```
-3 -8
-```
-
-### Part 5: Generating a set of sequences
-
-*If you are working in CodeSpaces work in file **`5b_part5.py`***
-
-A programmer is writing code to explore a mathematical sequence.
-
-In this sequence the next value is found by taking the product of the last two values.
-
-For example for the sequence starting : **2, 3**
-
-The next value is $2 \times 3$, growing the sequence to: **2, 3, 6**
-
-The next value is $3 \times 6$, growing the sequence to: **2, 3, 6, 18**
-
-The next value is $6 \times 18$, growing the sequence to: **2, 3, 6, 18, 108**
-
-Write a function `grow_list` that takes an input argument `mylist` that stores a sequence in a Python list.
-
-The function should calculate the next term in the sequence.
-
-It should return a **new** list that contains the extended sequence.
-
-After writing your code add the following code lines to test it. 
-
-```python
-list1 = [ 2, 3 ]
-list2 = grow_list(list1)
-list3 = grow_list(list2)
-
-print(list1, list2, list3)
-```
-
-This should produce the output:
-
-```
-[2, 3] [2, 3, 6] [2, 3, 6, 18]
-```
-
-Hint. to make a copy of a list you can use either code like:
-
-```python
-mylist = [1,2,3]
-mylist_copy1 = mylist.copy()
-mylist_copy2 = mylist[:]
+Hi, its good to see you Sarah!
+Hello Fred!
+Hi, whoever you are!
 ```
 
 ---
@@ -210,7 +191,7 @@ Run the following lines in the terminal to stage, commit and push your code back
 
 ```
 git add .
-git commit -m "completed 5b"
+git commit -m "completed 6b"
 git push
 ```
 
